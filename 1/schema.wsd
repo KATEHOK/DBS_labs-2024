@@ -1,8 +1,5 @@
 @startuml DB
 
-' Class01 <|-- Class02
-
-
 entity "Shows" {
   *ShowID : INTEGER [PK]
   ---
