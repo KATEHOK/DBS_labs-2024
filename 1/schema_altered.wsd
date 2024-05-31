@@ -1,0 +1,60 @@
+@startuml DB
+
+entity "Shows" {
+  *ShowID : INTEGER [PK]
+  ---
+  Title : TEXT
+  Year : INTEGER
+  Budget : REAL
+  Synopsis : TEXT
+}
+
+entity "Actors" {
+  *ActorID : INTEGER [PK]
+  ---
+  Name : TEXT
+  DateOfBirth : DATE
+  Biography : TEXT
+  Addition : TEXT
+}
+
+entity "Seasons" {
+  *SeasonID : INTEGER [PK]
+  ---
+  Title : TEXT
+  SeasonNumber : INTEGER
+  AirDate : DATE
+  ShowID : INTEGER [FK]
+}
+
+entity "Episodes" {
+  *EpisodeID : INTEGER [PK]
+  ---
+  Title : TEXT
+  EpisodeNumber : INTEGER
+  AirDate : DATE
+  SeasonID : INTEGER [FK]
+}
+
+entity "Reviews" {
+  *ReviewID : INTEGER [PK]
+  ---
+  ShowID : INTEGER [FK]
+  Reviewer : TEXT
+  ReviewText : TEXT
+  Rating : INTEGER
+}
+
+entity "Cast" {
+  *ActorID : INTEGER [PK] [FK]
+  *ShowID : INTEGER [PK] [FK]
+  ---
+  Role : TEXT
+}
+
+Shows ||--o{ Seasons : "has"
+Shows ||--o{ Reviews : "has"
+Shows ||--o{ Cast : "features"
+Actors ||--o{ Cast : "plays in"
+Seasons ||--o{ Episodes : "has"
+@enduml
